@@ -26,6 +26,9 @@ gem 'recursive-open-struct'
 # Fake Data for Sample Data
 gem 'faker', '~> 1.7'
 
+# Graphql gem
+gem 'graphql'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
