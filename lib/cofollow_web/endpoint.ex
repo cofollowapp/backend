@@ -52,5 +52,6 @@ defmodule CofollowWeb.Endpoint do
     signing_salt: "MTYiTC5o"
   )
 
+  plug(CORSPlug, headers: ["X-Apollo-Tracing" | CORSPlug.defaults()[:headers]])
   plug(CofollowWeb.Router)
 end
