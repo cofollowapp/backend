@@ -27,7 +27,12 @@ defmodule CofollowWeb.Router do
   scope "/graphql" do
     pipe_through(:graphql)
 
-    forward("/", Absinthe.Plug, schema: CofollowWeb.Schema)
+    forward(
+      "/",
+      Absinthe.Plug,
+      schema: CofollowWeb.Schema,
+      pipeline: {ApolloTracing.Pipeline, :plug}
+    )
   end
 
   if Mix.env() == :dev do
