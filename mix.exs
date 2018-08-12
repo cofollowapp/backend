@@ -46,7 +46,8 @@ defmodule Cofollow.MixProject do
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_phoenix, "~> 1.4"},
       {:poison, "~> 2.2"},
-      {:cors_plug, "~> 1.4"}
+      {:cors_plug, "~> 1.4"},
+      {:apollo_tracing, "~> 0.4.0"}
     ]
   end
 

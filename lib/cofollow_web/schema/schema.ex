@@ -1,5 +1,6 @@
 defmodule CofollowWeb.Schema do
   use Absinthe.Schema
+  use ApolloTracing
 
   import_types(CofollowWeb.Schema.Type.ItemType)
   import_types(CofollowWeb.Schema.Query.ItemQuery)
