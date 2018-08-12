@@ -20,14 +20,26 @@ defmodule CofollowWeb.Router do
     get("/", PageController, :index)
   end
 
-  forward("/graphql", Absinthe.Plug, schema: CofollowWeb.Schema)
+  pipeline :graphql do
+    plug(CofollowWeb.Context)
+  end
+
+  scope "/graphql" do
+    pipe_through(:graphql)
+
+    forward("/", Absinthe.Plug, schema: CofollowWeb.Schema)
+  end
 
   if Mix.env() == :dev do
-    forward(
-      "/graphiql",
-      Absinthe.Plug.GraphiQL,
-      schema: CofollowWeb.Schema,
-      interface: :playground
-    )
+    scope "/graphiql" do
+      pipe_through(:graphql)
+
+      forward(
+        "/",
+        Absinthe.Plug.GraphiQL,
+        schema: CofollowWeb.Schema,
+        socket: CofollowWeb.UserSocket
+      )
+    end
   end
 end

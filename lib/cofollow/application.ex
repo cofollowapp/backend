@@ -11,7 +11,11 @@ defmodule Cofollow.Application do
       # Start the Ecto repository
       Cofollow.Repo,
       # Start the endpoint when the application starts
-      CofollowWeb.Endpoint,
+      {CofollowWeb.Endpoint, []},
+      %{
+        id: Absinthe.Subscription,
+        start: {Absinthe.Subscription, :start_link, [CofollowWeb.Endpoint]}
+      }
       # Starts a worker by calling: Cofollow.Worker.start_link(arg)
       # {Cofollow.Worker, arg},
     ]

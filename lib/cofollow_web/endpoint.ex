@@ -1,5 +1,6 @@
 defmodule CofollowWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :cofollow
+  use Absinthe.Phoenix.Endpoint
 
   socket(
     "/socket",
@@ -51,5 +52,6 @@ defmodule CofollowWeb.Endpoint do
     signing_salt: "MTYiTC5o"
   )
 
+  plug(CORSPlug)
   plug(CofollowWeb.Router)
 end
