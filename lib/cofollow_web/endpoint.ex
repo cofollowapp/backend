@@ -52,6 +52,5 @@ defmodule CofollowWeb.Endpoint do
     signing_salt: "MTYiTC5o"
   )
 
-  plug(CORSPlug)
   plug(CofollowWeb.Router)
 end
