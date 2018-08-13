@@ -1,6 +1,6 @@
 version: 2 # use CircleCI 2.0 instead of CircleCI Classic
 jobs: # basic units of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
+  build_and_test_elixir: # runs not using Workflows must have a `build` job as entry point
     parallelism: 1 # run only one instance of this job in parallel
     docker: # run the steps with Docker
       - image: circleci/elixir:1.7.2 # ...with this image as the primary container; this is where all `steps` will run
@@ -61,3 +61,23 @@ jobs: # basic units of work in a run
             ssh-keyscan -H nearbycoder.com >> ~/.ssh/known_hosts
             git remote add production dokku@nearbycoder.com:cofollow
             git push production master --force
+
+  deploy_elixir: # runs not using Workflows must have a `build` job as entry point
+    parallelism: 1 # run only one instance of this job in parallel
+    steps: # commands that comprise the `build` job
+      - run:
+          name: Deploy to Dokku
+          command: |
+            ssh-keyscan -H nearbycoder.com >> ~/.ssh/known_hosts
+            git remote add production dokku@nearbycoder.com:cofollow
+            git push production master --force
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_and_test_elixir
+      - deploy_elixir:
+          filters:
+            branches:
+              only: master
