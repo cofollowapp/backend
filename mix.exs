@@ -6,6 +6,8 @@ defmodule Cofollow.MixProject do
       app: :cofollow,
       version: "0.1.0",
       elixir: "~> 1.7",
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test],
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
