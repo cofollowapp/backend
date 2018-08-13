@@ -6,6 +6,7 @@ jobs: # basic units of work in a run
       - image: circleci/elixir:1.7.2 # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           MIX_ENV: test
+          COVERALLS_REPO_TOKEN: rZHAhFgiFQNsHKdVUB8DZzZHCBwEOvfVO
       - image: circleci/postgres:10.1-alpine # database image
         environment: # environment variables for database
           POSTGRES_USER: postgres
@@ -30,6 +31,12 @@ jobs: # basic units of work in a run
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
       - run: mix do deps.get, compile # get updated dependencies & compile them
+      - run:
+          name: 'Create the test database'
+          command: mix ecto.create
+      - run:
+          name: 'Run Elixir test suite (with coveralls)'
+          command: mix coveralls
       - save_cache: # generate and store mix cache
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: 'deps'
