@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :cofollow, CofollowWeb.Endpoint,
-  check_origin: ["http://127.0.0.1:4000", "*"],
+  check_origin: ["//127.0.0.1:4000"],
   http: [:inet6, port: System.get_env("PORT") || 4000],
   url: [host: System.get_env("WEB_HOST"), port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
