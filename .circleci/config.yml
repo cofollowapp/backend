@@ -54,8 +54,8 @@ jobs: # basic units of work in a run
 
       - store_test_results: # upload junit test results for display in Test Summary
           path: _build/test/lib/cofollow # Replace with the name of your :app
-      
-          - run:
+
+      - run:
           name: Deploy to Dokku
           command: |
             ssh-keyscan -H nearbycoder.com >> ~/.ssh/known_hosts
